@@ -6,9 +6,6 @@ var Goal = [][]int{{1, 2, 3}, {4, 5, 6}, {7, 8, 0}}
 var Init = [][]int{{4, 1, 2}, {7, 0, 3}, {8, 5, 6}}
 var b Queue
 
-func plus(a int , b int) int{
-	return a+b
-}
 
 func findZeroLocation(puzzle [][]int) (int, int) {
 	for i := 0; i < 3; i++ {
