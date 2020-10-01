@@ -58,13 +58,13 @@ type Queue struct {
 	data []interface{}
 }
 
-func (q Queue) pop() interface{} {
+func (q *Queue) pop() interface{} {
 	head := q.data[0]
 	q.data = q.data[1:]
 	return head
 }
 
-func (q Queue) push(a interface{}) {
+func (q *Queue) push(a interface{}) {
 	q.data = append(q.data, a)
 }
 

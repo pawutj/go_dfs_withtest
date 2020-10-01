@@ -31,3 +31,26 @@ func TestFindZeroLocation(t *testing.T) {
 	}
 
 }
+
+func TestQueuePop(t *testing.T) {
+
+	q := Queue{data: []interface{}{1, 2, 3}}
+	c_1 := q.pop()
+	c_2 := q.pop()
+	if c_1 != 1 {
+		t.Error("should return 1")
+	}
+	if c_2 != 2 {
+		t.Error("should return 2")
+	}
+}
+
+func TestQueuePush(t *testing.T){
+	q := Queue{data : []interface{}{}}
+	q.push(1)
+	c := q.pop()
+	if(c!=1){
+		t.Error("shold return 1")
+	}
+
+}
