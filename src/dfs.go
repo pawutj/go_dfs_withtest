@@ -4,7 +4,7 @@ import "fmt"
 
 var Goal = [][]int{{1, 2, 3}, {4, 5, 6}, {7, 8, 0}}
 var Init = [][]int{{4, 1, 2}, {7, 0, 3}, {8, 5, 6}}
-var b Queue
+var bfsArray Queue
 
 
 func findZeroLocation(puzzle [][]int) (int, int) {
@@ -50,27 +50,37 @@ func puzzleEqual(a [][]int, b [][]int) bool {
 }
 
 type State struct {
+	id int
 	puzzle   [][]int
 	oldState []string
 }
 
+
+
 type Queue struct {
-	data []interface{}
+	data [] State
 }
 
-func (q *Queue) pop() interface{} {
+func (q *Queue) pop() State {
 	head := q.data[0]
 	q.data = q.data[1:]
 	return head
 }
 
-func (q *Queue) push(a interface{}) {
+func (q *Queue) push(a State) {
 	q.data = append(q.data, a)
 }
 
-func bfs() {
 
-}
+
+// func bfs() {
+// 	_c := bfsArray.pop()
+// 	c := _c.puzzle
+// 	if(puzzleEqual (c , Goal) ){
+// 		fmt.Println("END")
+// 		return true
+// 	}
+// }
 
 func main() {
 
@@ -83,7 +93,5 @@ func main() {
 	fmt.Println(d)
 	fmt.Println(puzzleEqual(Goal, c))
 
-	//a:=[]interface{}{1,2,3}
-	b = Queue{data: []interface{}{1, 2, 3}}
-	fmt.Println(b.pop())
+
 }
