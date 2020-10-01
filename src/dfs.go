@@ -73,14 +73,41 @@ func (q *Queue) push(a State) {
 
 
 
-// func bfs() {
-// 	_c := bfsArray.pop()
-// 	c := _c.puzzle
-// 	if(puzzleEqual (c , Goal) ){
-// 		fmt.Println("END")
-// 		return true
-// 	}
-// }
+func bfs() bool {
+	_c := bfsArray.pop()
+	c := _c.puzzle
+	fmt.Println(c)
+	if(puzzleEqual (c , Goal) ){
+		fmt.Println("END")
+		return true
+	}
+	x,y  := findZeroLocation(c)
+	if(x<2){
+		NewPuzzle := swapElement(c,x,y,x+1,y)
+		newState := State{puzzle:NewPuzzle}
+		bfsArray.push(newState)
+	}
+
+	if(x>0){
+		NewPuzzle := swapElement(c,x,y,x-1,y)
+		newState := State{puzzle:NewPuzzle}
+		bfsArray.push(newState)
+	}
+
+	if(y>0){
+		NewPuzzle := swapElement(c,x,y,x,y-1)
+		newState := State{puzzle:NewPuzzle}
+		bfsArray.push(newState)
+	}
+
+	if(y<2){
+		NewPuzzle := swapElement(c,x,y,x,y+1)
+		newState := State{puzzle:NewPuzzle}
+		bfsArray.push(newState)
+	}
+
+	return false
+}
 
 func main() {
 
@@ -92,6 +119,13 @@ func main() {
 	fmt.Println(c)
 	fmt.Println(d)
 	fmt.Println(puzzleEqual(Goal, c))
+
+	bfsArray.push(State{puzzle:Init})
+
+	for i:=0;i<4;i++{
+		bfs()
+	}
+
 
 
 }
