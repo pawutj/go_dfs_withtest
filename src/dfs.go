@@ -6,7 +6,6 @@ var Goal = [][]int{{1, 2, 3}, {4, 5, 6}, {7, 8, 0}}
 var Init = [][]int{{4, 1, 2}, {7, 0, 3}, {8, 5, 6}}
 var bfsArray Queue
 
-
 func findZeroLocation(puzzle [][]int) (int, int) {
 	for i := 0; i < 3; i++ {
 		for j := 0; j < 3; j++ {
@@ -50,15 +49,13 @@ func puzzleEqual(a [][]int, b [][]int) bool {
 }
 
 type State struct {
-	id int
+	id       int
 	puzzle   [][]int
 	oldState []string
 }
 
-
-
 type Queue struct {
-	data [] State
+	data []State
 }
 
 func (q *Queue) pop() State {
@@ -71,38 +68,41 @@ func (q *Queue) push(a State) {
 	q.data = append(q.data, a)
 }
 
-
-
 func bfs() bool {
 	_c := bfsArray.pop()
 	c := _c.puzzle
-	fmt.Println(c)
-	if(puzzleEqual (c , Goal) ){
+	//fmt.Println(c)
+	if puzzleEqual(c, Goal) {
 		fmt.Println("END")
+		fmt.Println(_c.oldState)
 		return true
 	}
-	x,y  := findZeroLocation(c)
-	if(x<2){
-		NewPuzzle := swapElement(c,x,y,x+1,y)
-		newState := State{puzzle:NewPuzzle}
+	x, y := findZeroLocation(c)
+	if x < 2 {
+		NewPuzzle := swapElement(c, x, y, x+1, y)
+		NewState := append(_c.oldState, "D")
+		newState := State{puzzle: NewPuzzle, oldState: NewState}
 		bfsArray.push(newState)
 	}
 
-	if(x>0){
-		NewPuzzle := swapElement(c,x,y,x-1,y)
-		newState := State{puzzle:NewPuzzle}
+	if x > 0 {
+		NewPuzzle := swapElement(c, x, y, x-1, y)
+		NewState := append(_c.oldState, "U")
+		newState := State{puzzle: NewPuzzle, oldState: NewState}
 		bfsArray.push(newState)
 	}
 
-	if(y>0){
-		NewPuzzle := swapElement(c,x,y,x,y-1)
-		newState := State{puzzle:NewPuzzle}
+	if y > 0 {
+		NewPuzzle := swapElement(c, x, y, x, y-1)
+		NewState := append(_c.oldState, "L")
+		newState := State{puzzle: NewPuzzle, oldState: NewState}
 		bfsArray.push(newState)
 	}
 
-	if(y<2){
-		NewPuzzle := swapElement(c,x,y,x,y+1)
-		newState := State{puzzle:NewPuzzle}
+	if y < 2 {
+		NewPuzzle := swapElement(c, x, y, x, y+1)
+		NewState := append(_c.oldState, "R")
+		newState := State{puzzle: NewPuzzle, oldState: NewState}
 		bfsArray.push(newState)
 	}
 
@@ -111,21 +111,10 @@ func bfs() bool {
 
 func main() {
 
-	c := copyPuzzle(Goal)
-	fmt.Println(findZeroLocation(Goal))
-	d := swapElement(c, 0, 0, 1, 1)
+	bfsArray.push(State{puzzle: Init, oldState: []string{}})
 
-	fmt.Println(Goal)
-	fmt.Println(c)
-	fmt.Println(d)
-	fmt.Println(puzzleEqual(Goal, c))
-
-	bfsArray.push(State{puzzle:Init})
-
-	for i:=0;i<4;i++{
-		bfs()
+	for end := false; end != true; {
+		end = bfs()
 	}
-
-
 
 }

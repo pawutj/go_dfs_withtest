@@ -33,25 +33,25 @@ func TestFindZeroLocation(t *testing.T) {
 }
 
 func TestQueuePop(t *testing.T) {
-	s_1  := State{id : 0}
-	s_2 := State{id:1}
-	q := Queue{data: [] State {s_1,s_2} }
-	p_1 := q.pop()
-	p_2 := q.pop()
-	if p_1.id != 0 {
+	s1 := State{id: 0}
+	s2 := State{id: 1}
+	q := Queue{data: []State{s1, s2}}
+	p1 := q.pop()
+	p2 := q.pop()
+	if p1.id != 0 {
 		t.Error("should return 0")
 	}
-	if p_2.id != 1 {
+	if p2.id != 1 {
 		t.Error("should return 1")
 	}
 }
 
-func TestQueuePush(t *testing.T){
-	q := Queue{data : [] State {}}
-	s_1  := State{id : 0}
+func TestQueuePush(t *testing.T) {
+	q := Queue{data: []State{}}
+	s1 := State{id: 0}
 	q.push(s_1)
-	p_1 := q.pop()
-	if(p_1.id!=0){
+	p1 := q.pop()
+	if p1.id != 0 {
 		t.Error("shold return 0")
 	}
 
